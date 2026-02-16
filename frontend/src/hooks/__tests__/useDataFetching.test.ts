@@ -36,8 +36,6 @@ describe("useDataFetching", () => {
     vi.mocked(api.getSchema).mockResolvedValueOnce(mockSchema);
     vi.mocked(api.getData).mockResolvedValueOnce(mockData);
 
-    const { result } = renderHook(() => useDataFetching());
-
     // Select dataset wrapped in act
     await act(async () => {
       useTableStore.getState().setSelectedDataset("test-ds");

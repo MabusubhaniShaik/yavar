@@ -10,13 +10,13 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { 
-  Pencil, 
-  Trash2, 
-  CheckSquare, 
-  Square, 
+import {
+  Pencil,
+  Trash2,
+  CheckSquare,
+  Square,
   XCircle,
-  Edit3
+  Edit3,
 } from "lucide-react";
 import { AdvancedFilter } from "./AdvancedFilter";
 import { BulkEditModal } from "./BulkEditModal";
@@ -29,7 +29,6 @@ export function DynamicTable() {
     isLoading,
     isSchemaLoading,
     columnWidths,
-    setData,
     getCurrentEndpoint,
     setEditingRecord,
     setIsEditModalOpen,
@@ -38,7 +37,7 @@ export function DynamicTable() {
     toggleSelectId,
     clearSelection,
     setIsBulkEditModalOpen,
-    refresh
+    refresh,
   } = useTableStore();
 
   const handleDelete = async (record: any) => {
@@ -57,7 +56,12 @@ export function DynamicTable() {
   };
 
   const handleBulkDelete = async () => {
-    if (!window.confirm(`Are you sure you want to delete ${selectedIds.length} records?`)) return;
+    if (
+      !window.confirm(
+        `Are you sure you want to delete ${selectedIds.length} records?`
+      )
+    )
+      return;
 
     try {
       const endpoint = getCurrentEndpoint().replace("/slow", "");
@@ -80,7 +84,7 @@ export function DynamicTable() {
     if (selectedIds.length === data.length && data.length > 0) {
       clearSelection();
     } else {
-      setSelectedIds(data.map(row => row._id || row.id));
+      setSelectedIds(data.map((row) => row._id || row.id));
     }
   };
 
@@ -111,7 +115,7 @@ export function DynamicTable() {
     <div className="space-y-4">
       <div className="flex items-center justify-between pb-1">
         <AdvancedFilter />
-        
+
         {/* Bulk Actions Toolbar */}
         {selectedIds.length > 0 && (
           <div className="flex items-center gap-3 bg-blue-50 border border-blue-200 px-4 py-2 rounded-lg animate-in fade-in slide-in-from-right-4 duration-300">
@@ -119,25 +123,25 @@ export function DynamicTable() {
               {selectedIds.length} items selected
             </span>
             <div className="h-4 w-px bg-blue-200 mx-1" />
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               className="h-8 text-blue-700 hover:bg-blue-100 flex gap-2"
               onClick={() => setIsBulkEditModalOpen(true)}
             >
               <Edit3 className="h-4 w-4" /> Bulk Edit
             </Button>
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               className="h-8 text-red-600 hover:bg-red-100 flex gap-2"
               onClick={handleBulkDelete}
             >
               <Trash2 className="h-4 w-4" /> Bulk Delete
             </Button>
-            <Button 
-              variant="ghost" 
-              size="icon" 
+            <Button
+              variant="ghost"
+              size="icon"
               className="h-8 w-8 text-blue-400 hover:text-blue-600"
               onClick={clearSelection}
             >
@@ -152,7 +156,12 @@ export function DynamicTable() {
           <TableHeader className="bg-gray-50/50">
             <TableRow>
               <TableHead className="w-12 text-center">
-                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleSelectAll}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="h-8 w-8"
+                  onClick={handleSelectAll}
+                >
                   {selectedIds.length === data.length && data.length > 0 ? (
                     <CheckSquare className="h-4 w-4 text-blue-600" />
                   ) : (
@@ -206,7 +215,7 @@ export function DynamicTable() {
                 const id = row._id || row.id;
                 const isSelected = selectedIds.includes(id);
                 return (
-                  <TableRow 
+                  <TableRow
                     key={id}
                     className={cn(
                       "transition-colors",
@@ -214,7 +223,12 @@ export function DynamicTable() {
                     )}
                   >
                     <TableCell className="text-center">
-                      <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => toggleSelectId(id)}>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8"
+                        onClick={() => toggleSelectId(id)}
+                      >
                         {isSelected ? (
                           <CheckSquare className="h-4 w-4 text-blue-600" />
                         ) : (
@@ -230,7 +244,10 @@ export function DynamicTable() {
                           minWidth: columnWidths[column.key] || column.width,
                         }}
                       >
-                        <div className="truncate font-medium text-gray-900" title={row[column.key]}>
+                        <div
+                          className="truncate font-medium text-gray-900"
+                          title={row[column.key]}
+                        >
                           {row[column.key] || "-"}
                         </div>
                       </TableCell>
@@ -264,7 +281,7 @@ export function DynamicTable() {
           </TableBody>
         </Table>
       </div>
-      
+
       <BulkEditModal />
     </div>
   );
