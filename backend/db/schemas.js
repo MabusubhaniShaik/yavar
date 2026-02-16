@@ -1,6 +1,3 @@
-// Schema definitions for each dataset
-// These define the structure, data types, and display properties for the dynamic table
-
 export const schemas = {
   netflix: {
     name: "Netflix Shows",

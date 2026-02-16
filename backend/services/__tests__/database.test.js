@@ -1,7 +1,6 @@
 import { jest } from "@jest/globals";
 import { ObjectId } from "mongodb";
 
-// Mock MongoDB and connection
 const mockCollection = {
   find: jest.fn().mockReturnThis(),
   skip: jest.fn().mockReturnThis(),
@@ -20,7 +19,6 @@ const mockDB = {
   collection: jest.fn().mockReturnValue(mockCollection),
 };
 
-// Relative to services/__tests__/database.test.js: ../../db/connection.js
 jest.unstable_mockModule("../../db/connection.js", () => ({
   getDB: jest.fn().mockReturnValue(mockDB),
   COLLECTIONS: {
@@ -28,7 +26,6 @@ jest.unstable_mockModule("../../db/connection.js", () => ({
   },
 }));
 
-// Relative to services/__tests__/database.test.js: ../database.js
 const {
   getAllRecords,
   getRecordById,
@@ -198,7 +195,9 @@ describe("Database Service", () => {
 
       const result = await bulkDeleteRecords("test", ids);
 
-      expect(mockCollection.deleteMany).toHaveBeenCalledWith(expect.any(Object));
+      expect(mockCollection.deleteMany).toHaveBeenCalledWith(
+        expect.any(Object)
+      );
       expect(result).toBe(2);
     });
   });

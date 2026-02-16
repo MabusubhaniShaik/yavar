@@ -58,9 +58,7 @@ process.on("SIGINT", async () => {
   process.exit(0);
 });
 
-/**
- * Start the server
- */
+// Start the server
 const start = async () => {
   try {
     // Connect to MongoDB first

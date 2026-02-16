@@ -3,15 +3,8 @@ import path from "path";
 import { parse } from "csv-parse";
 import { connectDB, getDB, COLLECTIONS, closeDB } from "../db/connection.js";
 
-// Seed script to import Kaggle datasets into MongoDB
-// Instructions:
-// 1. Download the 3 Kaggle datasets from the URLs in data/README.md
-// 2. Place the CSV files in the 'data' folder with exact names specified
-// 3. Run: npm run seed
-
 const DATA_DIR = path.join(process.cwd(), "data");
 
-// Helper function to read and parse CSV file
 function readCSV(filePath) {
   return new Promise((resolve, reject) => {
     const records = [];

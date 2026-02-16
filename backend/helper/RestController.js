@@ -1,8 +1,6 @@
 import * as dbService from "../services/database.js";
 
-/**
- * Base Controller class for CRUD operations
- */
+// Base Controller class for CRUD operations
 export class RestController {
   constructor(collectionName) {
     this.collectionName = collectionName;
@@ -28,9 +26,7 @@ export class RestController {
     // Default: do nothing
   }
 
-  /**
-   * Get all records with pagination and search
-   */
+  // Get all records with pagination and search */
   getAll = async (request, reply) => {
     try {
       const { page, limit, search, filters } = request.query;
@@ -73,9 +69,7 @@ export class RestController {
     }
   };
 
-  /**
-   * Bulk Update records
-   */
+  // Bulk Update records */
   bulkUpdate = async (request, reply) => {
     try {
       const { ids, data } = request.body;
@@ -112,9 +106,7 @@ export class RestController {
     }
   };
 
-  /**
-   * Bulk Delete records
-   */
+  // Bulk Delete records */
   bulkDelete = async (request, reply) => {
     try {
       const { ids } = request.body;
@@ -150,9 +142,7 @@ export class RestController {
     }
   };
 
-  /**
-   * Get a single record by ID
-   */
+  // Get a single record by ID */
   getById = async (request, reply) => {
     try {
       const { id } = request.params;
@@ -189,16 +179,14 @@ export class RestController {
     }
   };
 
-  /**
-   * Create a new record
-   */
+  // Create a new record */
   create = async (request, reply) => {
     try {
       let data = request.body;
 
       request.log.info({
         msg: `Creating new record in ${this.collectionName}`,
-        data: { ...data, ...{ largeDataOmitted: true } }, // Avoid logging potentially huge payloads entirely
+        data: { ...data, ...{ largeDataOmitted: true } },
       });
 
       // Execute pre-save hook
@@ -227,9 +215,7 @@ export class RestController {
     }
   };
 
-  /**
-   * Update a record by ID
-   */
+  // Update a record by ID */
   updateById = async (request, reply) => {
     try {
       const { id } = request.params;
@@ -282,9 +268,7 @@ export class RestController {
     }
   };
 
-  /**
-   * Delete a record by ID
-   */
+  // Delete a record by ID */
   deleteById = async (request, reply) => {
     try {
       const { id } = request.params;

@@ -7,7 +7,7 @@ const toObjectId = (id) => {
   try {
     return new ObjectId(id);
   } catch (e) {
-    return id; // Return original if not a valid ObjectId (fallback)
+    return id;
   }
 };
 
@@ -27,10 +27,7 @@ export async function getAllRecords(
   // Simple Search
   if (search) {
     // Search across all text fields (this requires a text index on the collection)
-    // Fallback: search in specific fields if no text index exists
-    query.$or = [
-      { $text: { $search: search } }
-    ];
+    query.$or = [{ $text: { $search: search } }];
   }
 
   // Advanced Filtering

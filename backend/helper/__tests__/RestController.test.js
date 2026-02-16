@@ -1,6 +1,5 @@
 import { jest } from "@jest/globals";
 
-// Relative to helper/__tests__/RestController.test.js: ../../services/database.js
 jest.unstable_mockModule("../../services/database.js", () => ({
   getAllRecords: jest.fn(),
   getRecordById: jest.fn(),
@@ -12,7 +11,6 @@ jest.unstable_mockModule("../../services/database.js", () => ({
 }));
 
 const dbService = await import("../../services/database.js");
-// Relative to helper/__tests__/RestController.test.js: ../RestController.js
 const { RestController } = await import("../RestController.js");
 
 describe("RestController", () => {
